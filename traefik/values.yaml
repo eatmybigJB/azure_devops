@@ -877,7 +877,7 @@ persistence:
   existingClaim: ""
   accessMode: ReadWriteOnce
   size: 1Gi
-  storageClass: "openebs-hostpath"
+  storageClass: "azurefile-csi"
   volumeName: ""
   path: /data
   annotations: {}
