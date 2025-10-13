@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: demo-vcluster
+  project: azure-test
   sources:
     - repoURL: https://traefik.github.io/charts
       chart: traefik
