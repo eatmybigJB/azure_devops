@@ -69,22 +69,22 @@ deployment:
   #   hostPath:
   #     path: /var/run/statsd-exporter
   # -- Additional initContainers (e.g. for setting file permission as shown below)
-  initContainers: []
-    # - name: volume-permissions
-    #   image: busybox:1.36
-    #   securityContext:
-    #     runAsUser: 65532
-    #     runAsGroup: 65532
-    #     runAsNonRoot: true
-    #     allowPrivilegeEscalation: false
-    #     capabilities:
-    #       drop: ["ALL"]
-    #     seccompProfile:
-    #       type: RuntimeDefault
-    #   command: ["sh","-c","chmod -Rv 600 /data/* || true"]
-    #   volumeMounts:
-    #     - name: data       # ← 必须与 Traefik chart 的数据卷同名（默认就是 data）
-    #       mountPath: /data
+  initContainers: 
+    - name: volume-permissions
+      image: busybox:1.36
+      securityContext:
+        runAsUser: 65532
+        runAsGroup: 65532
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+        seccompProfile:
+          type: RuntimeDefault
+      command: ["sh","-c","chmod -Rv 600 /data/* || true"]
+      volumeMounts:
+        - name: data       # ← 必须与 Traefik chart 的数据卷同名（默认就是 data）
+          mountPath: /data
   # The "volume-permissions" init container is required if you run into permission issues.
   # Related issue: https://github.com/traefik/traefik-helm-chart/issues/396
   # - name: volume-permissions
