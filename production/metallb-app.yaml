@@ -1,0 +1,36 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: metallb
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: demo-vcluster
+#   source:
+#     chart: metallb
+#     repoURL: https://metallb.github.io/metallb
+#     targetRevision: 0.15.2
+#     helm:
+#       values: |-
+#         controller:
+#           podSecurityPolicy:
+#             enabled: false
+#         speaker:
+#           podSecurityPolicy:
+#             enabled: false
+#         # configInline:
+#         #   address-pools:
+#         #     - name: default
+#         #       protocol: layer2
+#         #       addresses:
+#         #         - "192.168.1.90-192.168.1.95"
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: metallb
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
+#     syncOptions:
+#       - CreateNamespace=true

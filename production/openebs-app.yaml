@@ -1,0 +1,35 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: openebs
+#   namespace: argocd
+# spec:
+#   project: demo-vcluster
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: openebs
+
+#   # 用 sources（而不是 source）
+#   sources:
+#     # 1) Helm 仓库里的 Chart
+#     - repoURL: https://openebs.github.io/openebs
+#       chart: openebs
+#       targetRevision: 4.3.2
+#       helm:
+#         releaseName: openebs
+#         valueFiles:
+#           # 引用另一个 source（ref: values）里的文件
+#           - $values/openebs/values.yaml 
+
+#     # 2) 你的 Git 仓库（存放 values.yaml）
+#     - repoURL: https://gitlab.local.seems.fit/root/devops.git
+#       targetRevision: HEAD
+#       ref: values
+
+
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
+#     syncOptions:
+#       - CreateNamespace=true

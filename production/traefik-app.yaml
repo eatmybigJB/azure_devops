@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: demo-vcluster
+  sources:
+    - repoURL: https://traefik.github.io/charts
+      chart: traefik
+      targetRevision: 37.0.0
+      helm:
+        releaseName: traefik
+        valueFiles:
+          # 引用另一个 source（ref: values）里的文件
+          - $values/traefik/values.yaml 
+
+    # 2) 你的 Git 仓库（存放 values.yaml）
+    - repoURL: https://github.com/eatmybigJB/azure_devops.git
+      targetRevision: HEAD
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+
