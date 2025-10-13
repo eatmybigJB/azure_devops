@@ -6,7 +6,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: demo-vcluster
+  project: azure-test
   source:
     path: production/patch
     repoURL: https://github.com/eatmybigJB/azure_devops.git
