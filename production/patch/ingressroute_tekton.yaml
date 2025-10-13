@@ -1,16 +1,16 @@
-apiVersion: traefik.io/v1alpha1
-kind: IngressRoute
-metadata:
-  name: tekton-dashboard
-  namespace: tekton-pipelines
-spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`tekton.local.seems.fit`)
-      services:
-        - name: tekton-dashboard
-          port: 9097
-  # tls:
-  #   certResolver: cf   # 你已经配置好的 Cloudflare DNS-01 解析器
+# apiVersion: traefik.io/v1alpha1
+# kind: IngressRoute
+# metadata:
+#   name: tekton-dashboard
+#   namespace: tekton-pipelines
+# spec:
+#   entryPoints:
+#     - websecure
+#   routes:
+#     - kind: Rule
+#       match: Host(`tekton.local.seems.fit`)
+#       services:
+#         - name: tekton-dashboard
+#           port: 9097
+#   # tls:
+#   #   certResolver: cf   # 你已经配置好的 Cloudflare DNS-01 解析器
