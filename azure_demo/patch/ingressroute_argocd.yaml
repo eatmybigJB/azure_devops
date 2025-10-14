@@ -7,7 +7,6 @@ spec:
   entryPoints:
     - websecure
   routes:
-    # REST/静态资源：匹配 /argo-cd 下所有路径
     - kind: Rule
       match: Host(`argocd.azure.seems.fit`) && PathPrefix(`/argo-cd`)
       priority: 10
@@ -15,7 +14,6 @@ spec:
         - kind: TraefikService
           name: argocd-ts-rest
 
-    # gRPC / grpc-web：同路径下按内容类型走 h2c
     - kind: Rule
       match: Host(`argocd.azure.seems.fit`) && PathPrefix(`/argo-cd`) && Header(`Content-Type`,`application/grpc`)
       priority: 11
@@ -23,7 +21,4 @@ spec:
         - kind: TraefikService
           name: argocd-ts-grpc
   # tls:
-  #   certResolver: cf               # ← 用 Cloudflare 这个 resolver
-              
-  # tls:
-  #   secretName: argocd-certificate-secret   # 你的对外证书（在 argocd 命名空间） 
+  #   certResolver: cf               
