@@ -877,7 +877,7 @@ persistence:
   existingClaim: ""
   accessMode: ReadWriteOnce
   size: 1Gi
-  storageClass: "azurefile-csi"
+  storageClass: "managed-csi"
   volumeName: ""
   path: /data
   annotations: {}
