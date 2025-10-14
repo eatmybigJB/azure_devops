@@ -6,7 +6,7 @@
 #   finalizers:
 #     - resources-finalizer.argocd.argoproj.io
 # spec:
-#   project: demo-vcluster
+#   project: azure-demo
 #   sources:
 #     # 1) Chart 来源（Prometheus Community 仓库）
 #     - repoURL: https://prometheus-community.github.io/helm-charts
