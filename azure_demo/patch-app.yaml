@@ -6,7 +6,7 @@
 #   finalizers:
 #     - resources-finalizer.argocd.argoproj.io
 # spec:
-#   project: azure-test
+#   project: azure-demo
 #   source:
 #     path: production/patch
 #     repoURL: https://github.com/eatmybigJB/azure_devops.git

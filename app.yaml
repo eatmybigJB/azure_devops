@@ -6,9 +6,9 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: azure_demo
+  project: azure-demo
   source:
-    path: azure_demo
+    path: azure-demo
     repoURL: https://github.com/eatmybigJB/azure_devops.git
     targetRevision: HEAD
   destination:
