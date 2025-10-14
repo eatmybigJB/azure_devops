@@ -213,7 +213,7 @@ ingressRoute:
     # -- Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
     labels: {}
     # -- The router match rule used for the dashboard ingressRoute
-    matchRule: Host(`dashboard-traefik.local.seems.fit`)
+    matchRule: Host(`dashboard-traefik.azure.seems.fit`)
     # -- The internal service used for the dashboard ingressRoute
     services:
       - name: api@internal
