@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd_ingress
+  name: argocd-ingress
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: azure-demo
   source:
-    path: azure_demo/argocd_ingress
+    path: azure_demo/argocd-ingress
     repoURL: https://github.com/eatmybigJB/azure_devops.git
     targetRevision: HEAD
   destination:
