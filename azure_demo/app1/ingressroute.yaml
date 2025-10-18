@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: fileshare-route
+  namespace: fileshare
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`files.azure.seems.fit`) && PathPrefix(`/share`)
+      services:
+        - name: fileshare-svc
+          port: 80
+  tls:
+    certResolver: cf
