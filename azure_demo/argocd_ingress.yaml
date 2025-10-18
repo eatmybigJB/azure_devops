@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: patch
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: azure-demo
+  source:
+    path: azure_demo/argocd_ingress
+    repoURL: https://github.com/eatmybigJB/azure_devops.git
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
