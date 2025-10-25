@@ -1,13 +1,41 @@
-apiVersion: cert-manager.io/v1
-kind: Certificate
+# apiVersion: cert-manager.io/v1
+# kind: Certificate
+# metadata:
+#   name: argocd-ingressroute-certificate
+#   namespace: argocd
+# spec:
+#   # Secret names are always required.
+#   secretName: argocd-certificate-secret
+#   issuerRef:
+#     name: cloudflare-clusterissuer
+#     kind: ClusterIssuer
+#   dnsNames:
+#     - argocd.azure.seems.fit
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: argocd-ingressroute-certificate
+  name: argocd-server-ingress
   namespace: argocd
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"  # 指定 ClusterIssuer
 spec:
-  # Secret names are always required.
-  secretName: argocd-certificate-secret
-  issuerRef:
-    name: cloudflare-clusterissuer
-    kind: ClusterIssuer
-  dnsNames:
+  ingressClassName: azure-application-gateway
+  tls:
+  - hosts:
     - argocd.azure.seems.fit
+    secretName: argocd-tls-cf  # 证书存储在这个 Secret 中
+  rules:
+  - host: argocd.azure.seems.fit
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
