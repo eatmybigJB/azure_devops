@@ -18,19 +18,19 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    # 前端自动 301 到 HTTPS
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    # # 前端自动 301 到 HTTPS
+    # appgw.ingress.kubernetes.io/ssl-redirect: "true"
 
-    # 回源使用 HTTPS（端到端 TLS）
-    appgw.ingress.kubernetes.io/backend-protocol: "Https"
+    # # 回源使用 HTTPS（端到端 TLS）
+    # appgw.ingress.kubernetes.io/backend-protocol: "Https"
 
-    # ★ 指定回源的 Host/SNI，必须与后端证书的域名一致
-    appgw.ingress.kubernetes.io/backend-hostname: "argocd.azure.seems.fit"
+    # # ★ 指定回源的 Host/SNI，必须与后端证书的域名一致
+    # appgw.ingress.kubernetes.io/backend-hostname: "argocd.azure.seems.fit"
 
-    # ★ 把健康探针也切到 HTTPS/443（否则会被判不健康）
-    appgw.ingress.kubernetes.io/health-probe-hostname: "argocd.azure.seems.fit"
-    appgw.ingress.kubernetes.io/health-probe-protocol: "Https"
-    appgw.ingress.kubernetes.io/health-probe-port: "443"
+    # # ★ 把健康探针也切到 HTTPS/443（否则会被判不健康）
+    # appgw.ingress.kubernetes.io/health-probe-hostname: "argocd.azure.seems.fit"
+    # appgw.ingress.kubernetes.io/health-probe-protocol: "Https"
+    # appgw.ingress.kubernetes.io/health-probe-port: "443"
     cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"  # 指定 ClusterIssuer
 spec:
   ingressClassName: azure-application-gateway
@@ -48,4 +48,4 @@ spec:
           service:
             name: argo-cd-argocd-server
             port:
-              name: https
+              name: http
