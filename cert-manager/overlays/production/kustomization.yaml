@@ -8,4 +8,4 @@ resources:
 # - default-sa-token.yaml
 - cf_apikey.yaml
 - cf_clusterissuer.yaml
-# - cf_cert_argocd.yaml
+- cf_cert_argocd.yaml
