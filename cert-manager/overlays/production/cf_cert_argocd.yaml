@@ -32,7 +32,7 @@ spec:
   - host: argocd.azure.seems.fit
     http:
       paths:
-      - path: /
+      - path: /argo-cd
         pathType: Prefix
         backend:
           service:
