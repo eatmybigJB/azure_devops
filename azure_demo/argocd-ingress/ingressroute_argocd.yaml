@@ -8,14 +8,14 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argocd1.azure.seems.fit`) && PathPrefix(`/argo-cd`)
+      match: Host(`argocd.azure.seems.fit`) && PathPrefix(`/argo-cd`)
       priority: 10
       services:
         - kind: TraefikService
           name: argocd-ts-rest
 
     - kind: Rule
-      match: Host(`argocd1.azure.seems.fit`) && PathPrefix(`/argo-cd`) && Header(`Content-Type`,`application/grpc`)
+      match: Host(`argocd.azure.seems.fit`) && PathPrefix(`/argo-cd`) && Header(`Content-Type`,`application/grpc`)
       priority: 11
       services:
         - kind: TraefikService
