@@ -26,10 +26,10 @@ spec:
   ingressClassName: azure-application-gateway
   tls:
   - hosts:
-    - fileshare-4-57pm.azure.seems.fit
+    - demo-11-3.azure.seems.fit
     secretName: fileshare-tls-cf  
   rules:
-  - host: fileshare-4-57pm.azure.seems.fit
+  - host: demo-11-3.azure.seems.fit
     http:
       paths:
       - path: /
