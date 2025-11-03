@@ -1,23 +1,23 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: app1
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-spec:
-  project: azure-demo
-  source:
-    path: azure_demo/app1
-    repoURL: https://github.com/eatmybigJB/azure_devops.git
-    targetRevision: HEAD
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: fileshare
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: app1
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+# spec:
+#   project: azure-demo
+#   source:
+#     path: azure_demo/app1
+#     repoURL: https://github.com/eatmybigJB/azure_devops.git
+#     targetRevision: HEAD
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: fileshare
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
     # syncOptions:
       # - CreateNamespace=true
       # - ServerSideApply=true
