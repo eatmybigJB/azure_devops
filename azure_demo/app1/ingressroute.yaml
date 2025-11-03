@@ -1,42 +1,42 @@
-# apiVersion: traefik.io/v1alpha1
-# kind: IngressRoute
-# metadata:
-#   name: fileshare-route
-#   namespace: fileshare
-# spec:
-#   entryPoints:
-#     - websecure
-#   routes:
-#     - kind: Rule
-#       match: Host(`fileshare-4-57pm.azure.seems.fit`) && PathPrefix(`/share`)
-#       services:
-#         - name: fileshare-svc
-#           port: 80
-#   tls:
-#     certResolver: cf
+# # apiVersion: traefik.io/v1alpha1
+# # kind: IngressRoute
+# # metadata:
+# #   name: fileshare-route
+# #   namespace: fileshare
+# # spec:
+# #   entryPoints:
+# #     - websecure
+# #   routes:
+# #     - kind: Rule
+# #       match: Host(`fileshare-4-57pm.azure.seems.fit`) && PathPrefix(`/share`)
+# #       services:
+# #         - name: fileshare-svc
+# #           port: 80
+# #   tls:
+# #     certResolver: cf
 
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: fileshare-ingress
-  namespace: fileshare
-  annotations:
-    cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"  # 指定 ClusterIssuer
-spec:
-  ingressClassName: azure-application-gateway
-  tls:
-  - hosts:
-    - fileshare-4-57pm.azure.seems.fit
-    secretName: fileshare-tls-cf  
-  rules:
-  - host: fileshare-4-57pm.azure.seems.fit
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: fileshare-svc
-            port:
-              name: http
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: fileshare-ingress
+#   namespace: fileshare
+#   annotations:
+#     cert-manager.io/cluster-issuer: "cloudflare-clusterissuer"  # 指定 ClusterIssuer
+# spec:
+#   ingressClassName: azure-application-gateway
+#   tls:
+#   - hosts:
+#     - fileshare-4-57pm.azure.seems.fit
+#     secretName: fileshare-tls-cf  
+#   rules:
+#   - host: fileshare-4-57pm.azure.seems.fit
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: fileshare-svc
+#             port:
+#               name: http
 
