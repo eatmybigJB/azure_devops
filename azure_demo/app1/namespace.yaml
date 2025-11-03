@@ -1,4 +1,4 @@
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: fileshare
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fileshare
