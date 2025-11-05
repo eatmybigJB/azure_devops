@@ -12,10 +12,13 @@ deployment:
     path: /healthz
     initialDelaySeconds: 5
     periodSeconds: 10
-    
+
 service:
   name: fileshare-svc
+  type: ClusterIP
   portName: http
+  port: 80
+  targetPort: 80
 
 pvc:
   size: 20Gi

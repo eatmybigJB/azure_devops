@@ -13,10 +13,6 @@ spec:
       values: |
         ingress:
           host: demo-11-3.azure.seems.fit
-          tlsSecret: fileshare-tls-cf
-          className: azure-application-gateway
-          clusterIssuer: cloudflare-clusterissuer
-        namespace: fileshare
   destination:
     server: https://kubernetes.default.svc
     namespace: fileshare
