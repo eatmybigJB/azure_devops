@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: fileshare-pvc
-  namespace: fileshare
+  name: {{ .Release.Name }}-pvc
+  namespace: {{ .Values.namespace }}
 spec:
   accessModes:
-    - ReadWriteMany
+    {{- range .Values.pvc.accessModes }}
+    - {{ . }}
+    {{- end }}
   resources:
     requests:
-      storage: 20Gi
-  storageClassName: azurefile-csi
+      storage: {{ .Values.pvc.size }}
+  storageClassName: {{ .Values.pvc.storageClass }}

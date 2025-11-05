@@ -1,12 +1,42 @@
 namespace: fileshare
 
+deployment:
+  replicas: 1
+  image:
+    repository: nginx
+    tag: 1.25-alpine
+  containerPort: 80
+  mountPath: /usr/share/nginx/html
+
+  health:
+    path: /healthz
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    
 service:
   name: fileshare-svc
   portName: http
 
+pvc:
+  size: 20Gi
+  storageClass: azurefile-csi
+  accessModes:
+    - ReadWriteMany
+
+configmap:
+  nginxPort: 80
+  serverName: "_"
+  sharePath: "/share"
+  shareRoot: "/usr/share/nginx/html/"
+  autoindex: "on"
+  autoindexExactSize: "off"
+  autoindexLocaltime: "on"
+  healthPath: "/healthz"
+  healthResponse: "ok"
+
 ingress:
   enabled: true
   className: azure-application-gateway
-  host: demo-11-3.azure.seems.fit          # 默认值，后面会被 ArgoCD 覆盖
+  host: demo-11-3.azure.seems.fit
   tlsSecret: fileshare-tls-cf
   clusterIssuer: cloudflare-clusterissuer

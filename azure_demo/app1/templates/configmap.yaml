@@ -1,25 +1,25 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fileshare-nginx-conf
-  namespace: fileshare
+  name: {{ .Release.Name }}-nginx-conf
+  namespace: {{ .Values.namespace }}
 data:
   default.conf: |
     server {
-      listen 80;
-      server_name _;
+      listen {{ .Values.configmap.nginxPort }};
+      server_name {{ .Values.configmap.serverName }};
 
       # 把 /share 映射到文件根目录
-      location /share {
-        alias /usr/share/nginx/html/;
-        autoindex on;
-        autoindex_exact_size off;
-        autoindex_localtime on;
+      location {{ .Values.configmap.sharePath }} {
+        alias {{ .Values.configmap.shareRoot }};
+        autoindex {{ .Values.configmap.autoindex }};
+        autoindex_exact_size {{ .Values.configmap.autoindexExactSize }};
+        autoindex_localtime {{ .Values.configmap.autoindexLocaltime }};
       }
 
       # 简单健康检查
-      location = /healthz {
-        return 200 'ok';
+      location = {{ .Values.configmap.healthPath }} {
+        return 200 '{{ .Values.configmap.healthResponse }}';
         add_header Content-Type text/plain;
       }
     }
