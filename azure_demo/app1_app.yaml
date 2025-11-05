@@ -1,26 +1,26 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: app1
-#   namespace: argocd
-# spec:
-#   project: azure-demo
-#   source:
-#     repoURL: https://github.com/eatmybigJB/azure_devops.git
-#     targetRevision: HEAD
-#     path: azure_demo/app1
-#     helm:
-#       values: |
-#         ingress:
-#           host: demo-11-3.azure.seems.fit
-#           tlsSecret: fileshare-tls-cf
-#           className: azure-application-gateway
-#           clusterIssuer: cloudflare-clusterissuer
-#         namespace: fileshare
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: fileshare
-#   syncPolicy:
-#     automated:
-#       selfHeal: true
-#       prune: true
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app1
+  namespace: argocd
+spec:
+  project: azure-demo
+  source:
+    repoURL: https://github.com/eatmybigJB/azure_devops.git
+    targetRevision: HEAD
+    path: azure_demo/app1
+    helm:
+      values: |
+        ingress:
+          host: demo-11-3.azure.seems.fit
+          tlsSecret: fileshare-tls-cf
+          className: azure-application-gateway
+          clusterIssuer: cloudflare-clusterissuer
+        namespace: fileshare
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: fileshare
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
