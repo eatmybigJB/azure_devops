@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ .Values.service.name }}
+                name: {{ .Release.Name }}-svc
                 port:
                   name: {{ .Values.service.portName }}
